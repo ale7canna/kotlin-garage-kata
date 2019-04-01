@@ -1,0 +1,9 @@
+out/
+.idea
+.gradle
+.kotlintest
+
+*.jar
+*.war
+*.ear
+!gradle/wrapper/gradle-wrapper.jar
