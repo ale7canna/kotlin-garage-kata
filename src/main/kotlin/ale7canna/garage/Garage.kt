@@ -1,18 +1,16 @@
 package ale7canna.garage
 
-class Garage(private var parkAvailability: Int) {
-    private val parkedCars: MutableList<Car> = mutableListOf()
+open class Garage(private val parkAvailability: Int, private val parkedCars: List<Car>) {
 
-    fun canPark(): Boolean {
-        return parkAvailability > 0
-    }
+    fun canPark(): Boolean =
+        parkAvailability > 0
 
-    fun park(car: Car): Boolean{
-        if (parkAvailability <= 0)
-            return false
-        parkedCars.add(car)
-        parkAvailability -= 1
-        return true
-    }
+    fun park(car: Car): Garage =
+        if (!canPark()) FullGarage(parkedCars) else addCar(car)
 
+    private fun addCar(car: Car): Garage =
+        Garage(parkAvailability - 1, parkedCars + listOf(car))
+
+    fun isParked(car: Car): Boolean = parkedCars.contains(car)
 }
+
