@@ -7,14 +7,16 @@ import io.kotlintest.should
 import io.kotlintest.shouldBe
 import io.kotlintest.specs.StringSpec
 
-class GarageTest : StringSpec() {
-    private val sut = Garage(3, List())
-    init {
-        "Garage should contain the list of the parked cars" {
-            val car = Car()
-            val garage = sut.park(car)
+class EmptyGarageTest : StringSpec() {
+    private val sut = EmptyGarage(2)
 
-            garage.isParked(car) shouldBe true
+    init {
+        "An empty garage can host a car" {
+            sut.canPark() shouldBe true
+        }
+
+        "Park succeeds if has enough space" {
+            sut.park(Car()) should beOfType<Garage>()
         }
     }
 }
