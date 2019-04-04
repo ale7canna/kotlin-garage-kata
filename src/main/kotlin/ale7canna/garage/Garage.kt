@@ -1,16 +1,15 @@
 package ale7canna.garage
 
-open class Garage(private val parkAvailability: Int, private val parkedCars: List<Car>) {
+open class Garage(private val parkAvailability: Int, private val parkedCars: List<ITransportation>) {
+    fun canPark(transportation: ITransportation): Boolean =
+        transportation.size <= parkAvailability
 
-    fun canPark(): Boolean =
-        parkAvailability > 0
+    fun park(transportation: ITransportation): Garage =
+        if (!canPark(transportation)) FullGarage(parkedCars) else addCar(transportation)
 
-    fun park(car: Car): Garage =
-        if (!canPark()) FullGarage(parkedCars) else addCar(car)
+    private fun addCar(transportation: ITransportation): Garage =
+        Garage(parkAvailability - transportation.size, parkedCars + listOf(transportation))
 
-    private fun addCar(car: Car): Garage =
-        Garage(parkAvailability - 1, parkedCars + listOf(car))
-
-    fun isParked(car: Car): Boolean = parkedCars.contains(car)
+    fun isParked(transportation: ITransportation): Boolean =
+        parkedCars.contains(transportation)
 }
-

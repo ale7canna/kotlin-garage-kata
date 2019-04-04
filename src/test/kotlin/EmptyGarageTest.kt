@@ -12,7 +12,7 @@ class EmptyGarageTest : StringSpec() {
 
     init {
         "An empty garage can host a car" {
-            sut.canPark() shouldBe true
+            sut.canPark(Car()) shouldBe true
         }
 
         "Park succeeds if has enough space" {

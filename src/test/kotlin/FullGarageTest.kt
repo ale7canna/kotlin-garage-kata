@@ -14,7 +14,7 @@ class FullGarageTest : StringSpec() {
         }
 
         "A full garage can not host car" {
-            sut.canPark() shouldBe false
+            sut.canPark(Car()) shouldBe false
         }
     }
 }
